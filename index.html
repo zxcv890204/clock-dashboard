@@ -15,7 +15,7 @@
 <link rel="apple-touch-icon" href="/clock-dashboard/favicon.png">  <!-- 🔴 載入外部字體（Google Fonts） -->
 
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-
+<link rel="manifest" href="/clock-dashboard/manifest.json">
   <style>
     /* 🔴 CSS區：控制畫面外觀 */
     @keyframes shift {
@@ -64,16 +64,15 @@ body {
   align-items: center;
 }
 
-    #time {
-      font-size:　clamp(60px, 10vw, 140px); /* 🔴 字體大小 */
-      font-weight: 700; /* 🔴 粗體 */
-      letter-spacing: 2px; /* 🔴 字距 */
+#time {
+  font-size: clamp(60px, 10vw, 140px);
+  font-weight: 700;
+  letter-spacing: 2px;
 
-      text-shadow: 0 0 8px rgba(255,255,255,0.25); /* 🔴 發光 */
-　　　white-space: nowrap;
-　　　font-variant-numeric: tabular-nums;
-    }
-
+  text-shadow: 0 0 8px rgba(255,255,255,0.25);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
     #date {
       font-size: 20px;
       margin-top: 10px;
