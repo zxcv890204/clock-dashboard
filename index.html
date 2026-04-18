@@ -18,7 +18,14 @@
 
   <style>
     /* 🔴 CSS區：控制畫面外觀 */
+    @keyframes shift {
+  0% { transform: translate(0,0); }
+  100% { transform: translate(1px,1px); }
+}
 
+body {
+  animation: shift 60s infinite alternate;
+}
     body {
       text-align: center; /* 🔴 文字置中 */
       margin: 0; /* 🔴 移除預設邊距 */
