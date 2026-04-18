@@ -193,6 +193,11 @@ if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/clock-dashboard/sw.js')
     .then(() => console.log('SW registered'));
 }
+document.body.addEventListener("click", () => {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen().catch(() => {});
+  }
+});
 </script>
 
 </body>
