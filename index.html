@@ -8,7 +8,7 @@
   <title>Clock Dashboard</title> <!-- 🔴 分頁標題 -->
 
   <!-- 🔥 網頁圖標 -->
-  <link rel="icon" href=" 1logo.png">
+  <link rel="icon" href="1logo.png">
 
   <!-- 🔴 載入外部字體（Google Fonts） -->
 
@@ -37,16 +37,19 @@
     }
 
     .card {
-　width: min(80vw, 900px);
-　height: min(35vh, 350px);
-  padding: 30px 50px;
-  box-sizing: border-box; /* 🔥 很重要，不然會爆尺寸 */
+  width: min(80vw, 900px);   /* 🔥 核心：RWD */
+  height: min(35vh, 350px);
+
+  aspect-ratio: 3 / 1;       /* 🔥 關鍵：固定比例（不變形） */
+
+  padding: 30px;
+  box-sizing: border-box;
 
   border-radius: 20px;
   background: rgba(255,255,255,0.05);
   backdrop-filter: blur(10px);
 
-  display: flex;         /* 🔥 讓內容置中 */
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
