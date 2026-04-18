@@ -48,7 +48,8 @@ body {
     .card {
   width: min(80vw, 900px);   /* 🔥 核心：RWD */
   height: min(35vh, 350px);
-
+  font-size: 4vw;
+  padding: clamp(20px, 4vw, 60px);
   aspect-ratio: 3 / 1;       /* 🔥 關鍵：固定比例（不變形） */
 
   padding: 30px;
@@ -65,10 +66,12 @@ body {
 }
 
 #time {
-  font-size: clamp(60px, 10vw, 140px);
+  font-size: clamp(40px, 8vw, 120px);
   font-weight: 700;
   letter-spacing: 2px;
-
+  max-width: 100%;
+  overflow: hidden;
+  font-size: 2.5em;
   text-shadow: 0 0 8px rgba(255,255,255,0.25);
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
