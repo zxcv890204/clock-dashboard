@@ -1,0 +1,169 @@
+<!DOCTYPE html> <!-- 🔴 文件宣告：告訴瀏覽器這是HTML5 -->
+
+<html lang="zh-TW"> <!-- 🔴 設定語言 -->
+
+<head>
+  <meta charset="UTF-8"> <!-- 🔴 編碼：避免中文亂碼 -->
+
+  <title>Clock Dashboard</title> <!-- 🔴 分頁標題 -->
+
+  <!-- 🔥 網頁圖標 -->
+  <link rel="icon" href=" 1logo.png">
+
+  <!-- 🔴 載入外部字體（Google Fonts） -->
+
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* 🔴 CSS區：控制畫面外觀 */
+
+    body {
+      text-align: center; /* 🔴 文字置中 */
+      margin: 0; /* 🔴 移除預設邊距 */
+
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); /* 🔴 背景漸層 */
+
+      color: white; /* 🔴 文字顏色 */
+
+      font-family: 'Orbitron', sans-serif; /* 🔴 字體 */
+
+      display: flex; /* 🔴 啟用Flex排版 */
+      flex-direction: column; /* 🔴 垂直排列 */
+
+      justify-content: flex-start; /* 🔴 從上開始排 */
+      padding-top: 15vh; /* 🔴 上方留空 */
+
+      align-items: center; /* 🔴 水平置中 */
+      height: 100vh; /* 🔴 滿版高度 */
+    }
+
+    .card {
+      padding: 30px 50px; /* 🔴 內距 */
+      border-radius: 20px; /* 🔴 圓角 */
+
+      background: rgba(255,255,255,0.05); /* 🔴 半透明 */
+      backdrop-filter: blur(10px); /* 🔴 模糊背景 */
+    }
+
+    #time {
+      font-size: 88px; /* 🔴 字體大小 */
+      font-weight: 700; /* 🔴 粗體 */
+      letter-spacing: 2px; /* 🔴 字距 */
+
+      text-shadow: 0 0 8px rgba(255,255,255,0.25); /* 🔴 發光 */
+    }
+
+    #date {
+      font-size: 20px;
+      margin-top: 10px;
+      opacity: 0.7; /* 🔴 透明度 */
+    }
+
+    #weather {
+      margin-top: 20px;
+      font-size: 18px;
+      opacity: 0.85;
+    }
+  </style>
+
+</head>
+
+<body>  
+
+<!-- 🔴 HTML結構：畫面內容 -->
+
+<div class="card">
+  <div id="time">--:--</div> <!-- 🔴 時間顯示 -->
+  <div id="date">Loading...</div> <!-- 🔴 日期顯示 -->
+  <div id="weather">天氣載入中...</div> <!-- 🔴 天氣顯示 -->
+</div>
+
+<script>
+
+// 🔴 ===== 時區設定 =====
+const TIMEZONES = {
+  taipei: "Asia/Taipei", // 🔴 台北
+  tokyo: "Asia/Tokyo",   // 🔴 東京
+  ny: "America/New_York" // 🔴 紐約
+};
+
+let currentTimezone = TIMEZONES.taipei; 
+// 🔴 目前使用的時區（可變）
+
+
+// 🔴 ===== 時間更新 =====
+function updateTime() {
+
+  const now = new Date(); 
+  // 🔴 取得目前時間
+
+  const time = new Intl.DateTimeFormat("zh-TW", {
+    timeZone: currentTimezone, // 🔴 指定時區
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit"
+  }).format(now); 
+  // 🔴 格式化時間
+
+  const date = new Intl.DateTimeFormat("zh-TW", {
+    timeZone: currentTimezone,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    weekday: "long"
+  }).format(now); 
+  // 🔴 格式化日期
+
+  document.getElementById("time").innerText = time; 
+  // 🔴 更新時間
+
+  document.getElementById("date").innerText = date; 
+  // 🔴 更新日期
+}
+
+
+// 🔴 每秒更新一次
+setInterval(updateTime, 1000);
+
+updateTime(); 
+// 🔴 頁面載入先執行一次
+
+
+// 🔴 ===== 天氣API =====
+const apiKey = "d135d43a6d400318bde5b7fc1c4fef8b"; // 🔴 API金鑰
+const city = "Taipei,tw"; // 🔴 城市
+
+fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=zh_tw`)
+  // 🔴 發送請求
+
+  .then(res => res.json()) 
+  // 🔴 轉成JSON
+
+  .then(data => {
+
+    if (data.cod !== 200) {
+      throw new Error(data.message); 
+      // 🔴 API錯誤處理
+    }
+
+    const temp = data.main.temp; 
+    // 🔴 溫度
+
+    const desc = data.weather[0].description; 
+    // 🔴 天氣描述
+
+    document.getElementById("weather").innerText =
+      `📍台北　${temp}°C　｜　${desc}`; 
+    // 🔴 顯示天氣
+  })
+
+  .catch(err => {
+    document.getElementById("weather").innerText =
+      `天氣錯誤：${err.message}`; 
+    // 🔴 錯誤顯示
+  });
+
+</script>
+
+</body>
+</html>
