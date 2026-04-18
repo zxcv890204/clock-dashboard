@@ -1,0 +1,16 @@
+{
+  "name": "Clock Dashboard",
+  "short_name": "Clock",
+  "start_url": "/clock-dashboard/index.html",
+  "scope": "/clock-dashboard/",
+  "display": "standalone",
+  "background_color": "#0f2027",
+  "theme_color": "#0f2027",
+  "icons": [
+    {
+      "src": "/clock-dashboard/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
