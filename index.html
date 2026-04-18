@@ -8,8 +8,7 @@
   <title>Clock Dashboard</title> <!-- 🔴 分頁標題 -->
 
   <!-- 🔥 網頁圖標 -->
-  <link rel="icon" type="image/png" href="./1logo.png?v=2">
-<link rel="shortcut icon" href="./1logo.png?v=2">
+  <link rel="icon" href=" 1logo.png">
 
   <!-- 🔴 載入外部字體（Google Fonts） -->
 
@@ -31,27 +30,36 @@
       display: flex; /* 🔴 啟用Flex排版 */
       flex-direction: column; /* 🔴 垂直排列 */
 
-      justify-content: flex-start; /* 🔴 從上開始排 */
-      padding-top: 15vh; /* 🔴 上方留空 */
+      justify-content: center; /* 🔴　置中 */
 
       align-items: center; /* 🔴 水平置中 */
       height: 100vh; /* 🔴 滿版高度 */
     }
 
     .card {
-      padding: 30px 50px; /* 🔴 內距 */
-      border-radius: 20px; /* 🔴 圓角 */
+　width: min(80vw, 900px);
+　height: min(35vh, 350px);
+  padding: 30px 50px;
+  box-sizing: border-box; /* 🔥 很重要，不然會爆尺寸 */
 
-      background: rgba(255,255,255,0.05); /* 🔴 半透明 */
-      backdrop-filter: blur(10px); /* 🔴 模糊背景 */
-    }
+  border-radius: 20px;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
+
+  display: flex;         /* 🔥 讓內容置中 */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
     #time {
-      font-size: 88px; /* 🔴 字體大小 */
+      font-size:　clamp(60px, 10vw, 140px); /* 🔴 字體大小 */
       font-weight: 700; /* 🔴 粗體 */
       letter-spacing: 2px; /* 🔴 字距 */
 
       text-shadow: 0 0 8px rgba(255,255,255,0.25); /* 🔴 發光 */
+　　　white-space: nowrap;
+　　　font-variant-numeric: tabular-nums;
     }
 
     #date {
