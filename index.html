@@ -1,132 +1,112 @@
-<!DOCTYPE html> <!-- 🔴 文件宣告：告訴瀏覽器這是HTML5 -->
+<!DOCTYPE html>
 
-<html lang="zh-TW"> <!-- 🔴 設定語言 -->
-
+<html lang="zh-TW">
 <head>
-  <meta charset="UTF-8"> <!-- 🔴 編碼：避免中文亂碼 -->
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0f2027">
-<meta name="apple-mobile-web-app-capable" content="yes">
-  <title>Clock Dashboard</title> <!-- 🔴 分頁標題 -->
+  <meta name="theme-color" content="#0f2027">
+  <meta name="apple-mobile-web-app-capable" content="yes">
 
-  <!-- 🔥 網頁圖標 -->
-<link rel="icon" type="image/png" sizes="32x32" href="/clock-dashboard/favicon.png?v=1">
-<link rel="shortcut icon" href="/clock-dashboard/favicon.png?v=1">
-<link rel="apple-touch-icon" href="/clock-dashboard/favicon.png">  <!-- 🔴 載入外部字體（Google Fonts） -->
+  <title>Clock Dashboard</title>
 
+  <!-- favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/clock-dashboard/favicon.png?v=1">
+  <link rel="shortcut icon" href="/clock-dashboard/favicon.png?v=1">
+  <link rel="apple-touch-icon" href="/clock-dashboard/favicon.png">
+
+  <!-- manifest -->
+  <link rel="manifest" href="/clock-dashboard/manifest.json">
+
+  <!-- 字體 -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-<link rel="manifest" href="/clock-dashboard/manifest.json">
+
   <style>
-    /* 🔴 CSS區：控制畫面外觀 */
-    @keyframes shift {
-  0% { transform: translate(0,0); }
-  100% { transform: translate(1px,1px); }
-}
-
-body {
-  animation: shift 60s infinite alternate;
-}
     body {
-      text-align: center; /* 🔴 文字置中 */
-      margin: 0; /* 🔴 移除預設邊距 */
+      margin: 0;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: white;
+      font-family: 'Orbitron', sans-serif;
 
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); /* 🔴 背景漸層 */
-
-      color: white; /* 🔴 文字顏色 */
-
-      font-family: 'Orbitron', sans-serif; /* 🔴 字體 */
-
-      display: flex; /* 🔴 啟用Flex排版 */
-      flex-direction: column; /* 🔴 垂直排列 */
-
-      justify-content: center; /* 🔴　置中 */
-
-      align-items: center; /* 🔴 水平置中 */
-      height: 100vh; /* 🔴 滿版高度 */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
 
     .card {
-  width: min(80vw, 900px);   /* 🔥 核心：RWD */
-  height: min(35vh, 350px);
-  font-size: 4vw;
-  padding: clamp(20px, 4vw, 60px);
-  aspect-ratio: 3 / 1;       /* 🔥 關鍵：固定比例（不變形） */
+      width: min(80vw, 900px);
+      height: min(35vh, 350px);
+      aspect-ratio: 3 / 1;
 
-  padding: 30px;
-  box-sizing: border-box;
+      font-size: 4vw; /* 🔥 控制整體縮放 */
 
-  border-radius: 20px;
-  background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(10px);
+      padding: clamp(20px, 4vw, 60px);
+      box-sizing: border-box;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
+      border-radius: 20px;
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(10px);
 
-#time {
-  font-size: clamp(40px, 8vw, 120px);
-  font-weight: 700;
-  letter-spacing: 2px;
-  max-width: 100%;
-  overflow: hidden;
-  font-size: 2.5em;
-  text-shadow: 0 0 8px rgba(255,255,255,0.25);
-  white-space: nowrap;
-  font-variant-numeric: tabular-nums;
-}
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      gap: clamp(10px, 2vh, 25px); /* 🔥 間距 */
+    }
+
+    #time {
+      font-size: 2.5em; /* 🔥 跟著 card 縮放 */
+      font-weight: 700;
+      letter-spacing: 2px;
+
+      max-width: 100%;
+      overflow: hidden;
+
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+
+      text-shadow: 0 0 8px rgba(255,255,255,0.25);
+    }
+
     #date {
-      font-size: 20px;
-      margin-top: 10px;
-      opacity: 0.7; /* 🔴 透明度 */
+      font-size: 0.4em;
+      opacity: 0.7;
     }
 
     #weather {
-      margin-top: 20px;
-      font-size: 18px;
+      font-size: 0.45em;
       opacity: 0.85;
     }
   </style>
-
 </head>
 
-<body>  
-
-<!-- 🔴 HTML結構：畫面內容 -->
+<body>
 
 <div class="card">
-  <div id="time">--:--</div> <!-- 🔴 時間顯示 -->
-  <div id="date">Loading...</div> <!-- 🔴 日期顯示 -->
-  <div id="weather">天氣載入中...</div> <!-- 🔴 天氣顯示 -->
+  <div id="time">--:--</div>
+  <div id="date">Loading...</div>
+  <div id="weather">天氣載入中...</div>
 </div>
 
 <script>
-
-// 🔴 ===== 時區設定 =====
 const TIMEZONES = {
-  taipei: "Asia/Taipei", // 🔴 台北
-  tokyo: "Asia/Tokyo",   // 🔴 東京
-  ny: "America/New_York" // 🔴 紐約
+  taipei: "Asia/Taipei",
+  tokyo: "Asia/Tokyo",
+  ny: "America/New_York"
 };
 
-let currentTimezone = TIMEZONES.taipei; 
-// 🔴 目前使用的時區（可變）
+let currentTimezone = TIMEZONES.taipei;
 
-
-// 🔴 ===== 時間更新 =====
 function updateTime() {
-
-  const now = new Date(); 
-  // 🔴 取得目前時間
+  const now = new Date();
 
   const time = new Intl.DateTimeFormat("zh-TW", {
-    timeZone: currentTimezone, // 🔴 指定時區
+    timeZone: currentTimezone,
     hour: "2-digit",
     minute: "2-digit",
     second: "2-digit"
-  }).format(now); 
-  // 🔴 格式化時間
+  }).format(now);
 
   const date = new Intl.DateTimeFormat("zh-TW", {
     timeZone: currentTimezone,
@@ -134,58 +114,34 @@ function updateTime() {
     month: "2-digit",
     day: "2-digit",
     weekday: "long"
-  }).format(now); 
-  // 🔴 格式化日期
+  }).format(now);
 
-  document.getElementById("time").innerText = time; 
-  // 🔴 更新時間
-
-  document.getElementById("date").innerText = date; 
-  // 🔴 更新日期
+  document.getElementById("time").innerText = time;
+  document.getElementById("date").innerText = date;
 }
 
-
-// 🔴 每秒更新一次
 setInterval(updateTime, 1000);
+updateTime();
 
-updateTime(); 
-// 🔴 頁面載入先執行一次
-
-
-// 🔴 ===== 天氣API =====
-const apiKey = "d135d43a6d400318bde5b7fc1c4fef8b"; // 🔴 API金鑰
-const city = "Taipei,tw"; // 🔴 城市
+const apiKey = "d135d43a6d400318bde5b7fc1c4fef8b
+"; // ⚠️ 換成正確的
+const city = "Taipei,tw";
 
 fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=zh_tw`)
-  // 🔴 發送請求
-
-  .then(res => res.json()) 
-  // 🔴 轉成JSON
-
+  .then(res => res.json())
   .then(data => {
+    if (data.cod !== 200) throw new Error(data.message);
 
-    if (data.cod !== 200) {
-      throw new Error(data.message); 
-      // 🔴 API錯誤處理
-    }
-
-    const temp = data.main.temp; 
-    // 🔴 溫度
-
-    const desc = data.weather[0].description; 
-    // 🔴 天氣描述
+    const temp = data.main.temp;
+    const desc = data.weather[0].description;
 
     document.getElementById("weather").innerText =
-      `📍台北　${temp}°C　｜　${desc}`; 
-    // 🔴 顯示天氣
+      `📍台北 ${temp}°C ｜ ${desc}`;
   })
-
   .catch(err => {
     document.getElementById("weather").innerText =
-      `天氣錯誤：${err.message}`; 
-    // 🔴 錯誤顯示
+      `天氣錯誤：${err.message}`;
   });
-
 </script>
 
 </body>
